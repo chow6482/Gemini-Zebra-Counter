@@ -24,9 +24,13 @@ def download_image(url):
     """
     Download an image from a URL and return a PIL Image object.
     """
+    headers = {
+        "User-Agent": "ZebraCounter/1.0 (https://github.com/chow6482/Gemini-Zebra-Counter; chow6482@kettering.edu)"
+    }
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         response.raise_for_status()
+        print(f"Image downloaded successfully: {response.status_code}")
         return Image.open(BytesIO(response.content))
     except Exception as e:
         print(f"Error downloading image: {e}")
